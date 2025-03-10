@@ -1,3 +1,3 @@
 import Foundation
-@testable import GitlabAPI
+@testable import GitLabAPI
 import Testing
