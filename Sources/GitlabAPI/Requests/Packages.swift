@@ -46,7 +46,7 @@ public struct PackageFile: Decodable {
 }
 
 extension GitLabRequest {
-	static func packages(
+	static public func packages(
 		id: Int,
 		orderBy: Package.OrderBy? = nil,
 		type: Package.PackageType? = nil,
@@ -88,11 +88,11 @@ extension GitLabRequest {
 		)
 	}
 
-	static func packageFiles(projectID: Int, packageID: Int) -> GitLabRequest<[PackageFile]> {
+	static public func packageFiles(projectID: Int, packageID: Int) -> GitLabRequest<[PackageFile]> {
 		.init(path: "/projects/\(projectID)/packages/\(packageID)/package_files")
 	}
 
-	static func delete(projectID: Int, packageFile: PackageFile) -> GitLabRequest<EmptyResponse> {
+	static public func delete(projectID: Int, packageFile: PackageFile) -> GitLabRequest<EmptyResponse> {
 		.init(
 			method: .delete,
 			path: "/projects/\(projectID)/packages/\(packageFile.package_id)/package_files/\(packageFile.id)"
