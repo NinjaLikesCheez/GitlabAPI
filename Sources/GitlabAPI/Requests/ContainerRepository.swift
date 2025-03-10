@@ -68,8 +68,14 @@ extension GitLabRequest {
 	) -> GitLabRequest<[GitLab.ContainerRepository]> {
 		.init(
 			path: "projects/\(id)/registry/repositories",
-			body: {
-				JSONBody(["tags": tags, "tags_count": tagsCount])
+			prepare: {
+				var request = $0
+				request.url = $0.url?.appending(queryItems: [
+					.init(name: "tags", value: tags ? "true" : "false"),
+					.init(name: "tags_count", value: tagsCount ? "true" : "false")
+				])
+
+				return request
 			}
 		)
 	}
